@@ -1,0 +1,65 @@
+-trou noir: 
+    -empèche de voir où sont les fantomes
+    -tout les x secondes il disparait pendant x secondes
+
+-boost vitesse:
+    -augmente la vitesse de toute les entités qui passe dessus 
+    -utilisable une seule fois
+    -disparait après utilisation
+
+-teleporteur:
+    -teleporte toute entité passant dessus à un autre téléporteur.
+    -utilisable à l'infini
+
+-invisibilité ghost:
+    -si fantome passe dessus, il devient invisible()
+
+
+il faut savoir le type des blocks dans un carré de 3x3 autour de lui sous la forme:
+[[('type','move',(x,y)),('type','move',(x,y)),('type','move',(x,y))],
+[('type','move',(x,y)),('type','move',(x,y)),('type','move',(x,y))],
+[('type','move',(x,y)),('type','move',(x,y)),('type','move',(x,y))]]
+
+il faut connaitre la position de pacman dans le graphe sous la forme:
+[(xg,yg),(xg,yg)]
+
+si xp ou yp inferieu à xg ou yg * 35 -35 et état de pacman est left ou up
+    suprimer (xg,yg) de la liste de coordonnées
+
+si xp ou yp superieur à x ou y x 35 +35 et état de pacman est right ou down
+    suprimer (xg,yg) de la liste de coordonnées
+
+chaque (xg,yg) est associé à une liste de blocks autour de lui et c'est le [1][1] de la liste
+
+collision:
+si la taille de la liste de coordonnées==1
+pour chaque (xg,yg) dans la liste de coordonnées
+    si ask_move = up
+        créer une nouvelle liste avec tout les blocks  
+
+
+
+vitesse entités:
+dépend:
+-temps d'exécution de leur programme (temmps d'éxécution pour update la postion de l'entité)
+-taille d'une tuille donc taille de la fenêtre
+
+calcul temps d'éxécution:
+-lancement non visuel du programme + calcul du temps d'exec de l'update de chaque entités
+    algo calcul tps exec:
+        si le programme vient d'être lancé alors
+            tps post update  - tps départ programme
+
+        besoins de créer un booléen qui passe à false après le 1er tour du while running
+
+        movement entités faisable que si ce booléen vaut false
+
+taille de la tuille:
+-largeur de l'écran - 81 / 27
+
+calcul vitesse:
+- largeur_block * tps exec / 14    
+
+choix aléatoire entre les lieux accécibles
+
+si end pas dans traversal alors sur un chemin 'prédéfini'
